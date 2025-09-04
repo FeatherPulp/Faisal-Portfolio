@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from "react";
-import { ChevronDown, Code, Smartphone, Globe, Mail, Github } from "lucide-react";
+import { ChevronDown, Code, Smartphone, Globe, Mail, Github, X } from "lucide-react";
 import  Link from 'next/link';
 import gsap from "gsap";
 import SplitText from "gsap/SplitText";
@@ -14,9 +14,13 @@ export default function Home() {
   const [loadingDone, setLoadingDone] = useState(false);
   const [hasSeenAnimation, setHasSeenAnimation] = useState(false);
   const [isClient, setIsClient] = useState(false); 
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-
-
+     // Close mobile menu when clicking on a link
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
+  
 
 gsap.registerPlugin(SplitText);
 gsap.registerPlugin(ScrollToPlugin);
@@ -256,7 +260,64 @@ tl.to(splitHeroTitle.chars, {
                   Contact
                 </Link>
               </div>
+                    <div className="md:hidden">
+  <button 
+    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+    className="text-gray-700 hover:text-blue-600 transition-colors p-2"
+    aria-label="Toggle menu"
+  >
+    {isMobileMenuOpen ? (
+      <X className="w-6 h-6" />
+    ) : (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    )}
+  </button>
+</div>
             </div>
+                     {/* Mobile Navigation Menu */}
+{isMobileMenuOpen && (
+  <div className="md:hidden">
+    <div className="px-2 pt-2 pb-3 space-y-1 bg-white shadow-lg rounded-lg border border-gray-100 mt-2">
+      <Link 
+        href="/" 
+        onClick={closeMobileMenu}
+        className="text-gray-700 hover:text-blue-600 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium transition-colors"
+      >
+        Home
+      </Link>
+      <Link 
+        href="/about" 
+        onClick={closeMobileMenu}
+        className="text-blue-600 bg-blue-50 block px-3 py-2 rounded-md text-base font-semibold"
+      >
+        About
+      </Link>
+      <Link 
+        href="/skills" 
+        onClick={closeMobileMenu}
+        className="text-gray-700 hover:text-blue-600 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium transition-colors"
+      >
+        Skills
+      </Link>
+      <Link 
+        href="/projects" 
+        onClick={closeMobileMenu}
+        className="text-gray-700 hover:text-blue-600 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium transition-colors"
+      >
+        Projects
+      </Link>
+      <Link 
+        href="/contact" 
+        onClick={closeMobileMenu}
+        className="text-gray-700 hover:text-blue-600 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium transition-colors"
+      >
+        Contact
+      </Link>
+    </div>
+  </div>
+)}
           </nav>
         </header>
 
@@ -270,7 +331,7 @@ tl.to(splitHeroTitle.chars, {
           </div>
 
           <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 className="hero-title text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6">
+            <h1 className="hero-title text-3xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6">
               Full Stack Developer
               
             </h1>
@@ -352,13 +413,15 @@ tl.to(splitHeroTitle.chars, {
                 <Mail className="w-5 h-5" /> 
                 Send Message
               </Link>
-              <Link
-                href="https://github.com/yourusername" 
+              <a
+                href="https://github.com/FaisalAhmeddd/" 
+                target="_blank"
+                rel="noopener noreferrer"
                 className="contact-link inline-flex items-center gap-3 bg-gray-800 text-white px-8 py-4 rounded-full font-semibold hover:bg-gray-900 transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
               >
                 <Github className="w-5 h-5" /> 
                 View GitHub
-              </Link>
+              </a>
             </div>
             <p className="contact-text text-gray-500 mt-6">ahmadfaiz500@gmail.com</p>
           </div>
@@ -388,9 +451,12 @@ tl.to(splitHeroTitle.chars, {
         <Link href="/contact" className="hover:text-blue-400" aria-label="Email">
           <Mail className="w-5 h-5" />
         </Link>
-        <Link href="https://github.com/yourusername" className="hover:text-blue-400" aria-label="GitHub">
+        <a href="https://github.com/FaisalAhmeddd/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="hover:text-blue-400" aria-label="GitHub">
           <Github className="w-5 h-5" />
-        </Link>
+        </a>
         {/* Add more icons as needed */}
       </div>
     </div>
@@ -568,13 +634,15 @@ tl.to(splitHeroTitle.chars, {
               <Mail className="w-5 h-5" /> 
               Send Message
             </Link>
-            <Link
-              href="https://github.com/yourusername" 
+            <a
+              href="https://github.com/FaisalAhmeddd/" 
+              target="_blank"
+              rel="noopener noreferrer"
               className="contact-link inline-flex items-center gap-3 bg-gray-800 text-white px-8 py-4 rounded-full font-semibold hover:bg-gray-900 transition-all duration-300 transform hover:scale-105 hover:shadow-xl opacity-0"
             >
               <Github className="w-5 h-5" /> 
               View GitHub
-            </Link>
+            </a>
           </div>
           <p className="contact-text text-gray-500 mt-6 opacity-0">ahmadfaiz500@gmail.com</p>
         </div>
